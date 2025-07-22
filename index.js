@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
+import serverless from 'serverless-http';
+
 
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -17,6 +19,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
+app.get('/register', (req, res) => {
+  res.send('Register Page');
+});
+
+export const handler = serverless(app);
+app.get('/register', (req, res) => {
+  res.render('register'); // Or res.sendFile(__dirname + '/register.html') if it's a static file
+});
+
 app.post("/register", (req, res) => {
   res.sendFile(__dirname + "/public/index2.html");
 })

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Submitted</title>
+  <link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+  <p><strong>Thanks for your submission! 😄</strong></p>
+
+  <% if (latestPost) { %>
+    <p>You posted: <strong><%= latestPost %></strong></p>
+  <% } %>
+
+  <h3>Latest Posts</h3>
+  <% if (latestPost) { %>
+    <p>You posted recently: <%= latestPost %></p>
+  <% } else { %>
+    <p>No recent post.</p>
+  <% } %>
+
+  <h3>Your Posts</h3>
+  <ul>
+    <% postContent.forEach((post, index) => { %>
+      <li>
+        <%= post %>
+
+        <!-- Delete Button -->
+        <form action="/delete" method="POST" style="display:inline;">
+          <input type="hidden" name="id" value="<%= index %>">
+          <input type="submit" value="Delete">
+        </form>
+
+        <!-- Edit Button -->
+        <form action="/edit" method="GET" style="display:inline;">
+          <input type="hidden" name="id" value="<%= index %>">
+          <input type="submit" value="Edit">
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>
